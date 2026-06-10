@@ -18,6 +18,7 @@ const {
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL('/og.png', Astro.site).href;
 ---
 
 <!doctype html>
@@ -42,7 +43,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content="Adefila Abdulmuiz" />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Adefila Abdulmuiz — a human being who ships software. Mobile & web development, CAD and electrical engineering." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} />
     <meta name="theme-color" content="#0b0d0e" />
     <title>{title}</title>
     <ClientRouter />

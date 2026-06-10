@@ -15,5 +15,8 @@
     "@astrojs/sitemap": "^3.7.3",
     "@fontsource/jetbrains-mono": "^5.2.8",
     "astro": "^6.4.5"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2"
   }
 }

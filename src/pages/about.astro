@@ -1,6 +1,5 @@
 ---
 import Base from '../layouts/Base.astro';
-import PixelAvatar from '../components/PixelAvatar.astro';
 
 const log = [
   { date: '2024-10', entry: 'Joined Decentralyne as a mobile developer — still there, still shipping.' },
@@ -26,8 +25,18 @@ const log = [
       </p>
     </div>
     <figure class="portrait">
-      <PixelAvatar size={128} />
-      <figcaption class="label">adefila.png · 16×16</figcaption>
+      <div class="frame">
+        <img
+          src="/about-portrait.png"
+          width="220"
+          height="220"
+          alt="Pixel-art portrait of Adefila Abdulmuiz"
+          loading="lazy"
+          decoding="async"
+        />
+        <span class="scan" aria-hidden="true"></span>
+      </div>
+      <figcaption class="label">adefila.png</figcaption>
     </figure>
   </section>
 
@@ -121,6 +130,40 @@ const log = [
     display: grid;
     gap: var(--space-2);
     justify-items: center;
+  }
+
+  .frame {
+    position: relative;
+    line-height: 0;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    box-shadow: 0 0 0 4px var(--surface);
+    transition: border-color var(--speed-fast) var(--ease);
+  }
+
+  .frame:hover {
+    border-color: var(--accent);
+  }
+
+  .frame img {
+    display: block;
+    width: clamp(168px, 38vw, 220px);
+    height: auto;
+    image-rendering: pixelated;
+  }
+
+  .scan {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.22) 0px,
+      rgba(0, 0, 0, 0.22) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    opacity: 0.5;
   }
 
   .breadcrumb a {

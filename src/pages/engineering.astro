@@ -1,0 +1,179 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+
+const projects = (await getCollection('projects', (p) => p.data.domain === 'engineering')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+const placements = projects.filter((p) => p.data.kind === 'placement');
+const freelance = projects.filter((p) => p.data.kind === 'freelance');
+
+/* honest skill levels — straight from the CV, not inflated */
+const skills = [
+  { level: 'confident', meter: '████', items: ['AutoCAD', 'DIALux'] },
+  {
+    level: 'used in production, sharpening',
+    meter: '███░',
+    items: ['AutoCAD Plant 3D', 'Navisworks', 'Autodesk Inventor'],
+  },
+  {
+    level: 'SLDs so far, expanding',
+    meter: '███░',
+    items: ['AutoCAD Electrical'],
+  },
+  { level: 'exposure', meter: '██░░', items: ['ETAP', 'FluidSim', 'Proteus'] },
+];
+
+const core = [
+  'piping design',
+  'P&ID interpretation',
+  'isometric drawings',
+  'electrical load calcs',
+  'lighting layout',
+];
+---
+
+<Base
+  title="Engineering — Adefila Abdulmuiz"
+  description="Engineering & CAD portfolio of Adefila Abdulmuiz — AutoCAD, Plant 3D, DIALux, power SLDs, and data-center operations."
+>
+  <section class="intro">
+    <p class="label breadcrumb"><a href="/">~</a>/engineering</p>
+    <h1>Drawings that get built.</h1>
+    <p class="lede">
+      CAD and electrical engineering grounded in real industry work: plant design
+      at NNPC, live data-center infrastructure on SIWES, and freelance
+      medium-voltage drafting in between. If it has a single-line diagram, I've
+      probably drawn one like it.
+    </p>
+  </section>
+
+  <section class="group">
+    <h2 class="label" data-reveal>// placements</h2>
+    <div class="grid">
+      {placements.map((p, i) => <ProjectCard project={p} index={i} />)}
+    </div>
+  </section>
+
+  <section class="group">
+    <h2 class="label" data-reveal>// freelance</h2>
+    <div class="grid">
+      {freelance.map((p, i) => <ProjectCard project={p} index={i} />)}
+    </div>
+  </section>
+
+  <section class="group">
+    <h2 class="label" data-reveal>// tools — honest levels</h2>
+    <dl class="skills">
+      {
+        skills.map((s, i) => (
+          <div class="skill-row" data-reveal style={`--reveal-delay: ${i * 70}ms`}>
+            <dt>
+              <span class="meter" aria-hidden="true">{s.meter}</span>
+              <span class="label">{s.level}</span>
+            </dt>
+            <dd>{s.items.join(' · ')}</dd>
+          </div>
+        ))
+      }
+    </dl>
+    <p class="core" data-reveal>
+      <span class="label">core competencies:</span>
+      {core.join(' · ')}
+    </p>
+  </section>
+
+  <aside class="other-lane" data-reveal>
+    <p class="label">// the other lane</p>
+    <p>
+      I also ship mobile and web apps for a living —
+      <a href="/software">cd ../software →</a>
+    </p>
+  </aside>
+</Base>
+
+<style>
+  .intro {
+    padding-block: var(--space-6) var(--space-5);
+  }
+
+  .breadcrumb a {
+    color: var(--text-muted);
+  }
+
+  h1 {
+    margin-block: var(--space-3);
+  }
+
+  .lede {
+    color: var(--text-muted);
+    font-size: var(--text-lg);
+  }
+
+  .group {
+    padding-block: var(--space-4);
+  }
+
+  .grid {
+    margin-top: var(--space-3);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+    gap: var(--space-4);
+    align-items: stretch;
+  }
+
+  .skills {
+    margin-top: var(--space-3);
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .skill-row {
+    display: grid;
+    grid-template-columns: 18rem 1fr;
+    gap: var(--space-3);
+    padding: var(--space-2) 0;
+    border-bottom: 1px dashed var(--border);
+    font-size: var(--text-sm);
+  }
+
+  .skill-row dt {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+  }
+
+  .meter {
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  .skill-row dd {
+    margin: 0;
+  }
+
+  .core {
+    margin-top: var(--space-4);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+
+  .other-lane {
+    margin-top: var(--space-6);
+    border: 1px dashed var(--border);
+    padding: var(--space-4);
+  }
+
+  .other-lane p:last-child {
+    margin-top: var(--space-2);
+  }
+
+  @media (max-width: 540px) {
+    .skill-row {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+  }
+</style>

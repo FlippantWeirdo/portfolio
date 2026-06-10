@@ -1,0 +1,172 @@
+---
+import Base from '../layouts/Base.astro';
+
+const channels = [
+  {
+    k: 'email',
+    label: 'abdulmuiza@outlook.com',
+    href: 'mailto:abdulmuiza@outlook.com',
+    note: 'fastest route — I reply quicker than Google Play approves apps',
+  },
+  {
+    k: 'phone / whatsapp',
+    label: '+234 806 285 4313',
+    href: 'tel:+2348062854313',
+    note: 'lagos time (WAT)',
+  },
+  {
+    k: 'linkedin',
+    label: 'abdulmuiz-adefila',
+    href: 'https://www.linkedin.com/in/abdulmuiz-adefila-000b89265/',
+    note: 'professional-ish',
+  },
+  {
+    k: 'github',
+    label: 'FlippantWeirdo',
+    href: 'https://github.com/FlippantWeirdo',
+    note: 'the username predates the professionalism',
+  },
+];
+---
+
+<Base
+  title="Contact — Adefila Abdulmuiz"
+  description="Get in touch with Adefila Abdulmuiz — email, LinkedIn, GitHub. Based in Lagos, Nigeria."
+>
+  <section class="intro">
+    <p class="label breadcrumb"><a href="/">~</a>/contact</p>
+    <h1>Say hello.</h1>
+    <p class="lede">
+      Got a product to ship, a diagram to draw, or something in between? My inbox
+      is open — whether you arrived here for the software or the switchgear.
+    </p>
+  </section>
+
+  <section class="group">
+    <h2 class="label" data-reveal>// channels</h2>
+    <ul class="channels">
+      {
+        channels.map((c, i) => (
+          <li data-reveal style={`--reveal-delay: ${i * 70}ms`}>
+            <span class="label key">{c.k}</span>
+            <span class="value">
+              <a
+                href={c.href}
+                target={c.href.startsWith('http') ? '_blank' : undefined}
+                rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              >
+                {c.label}
+              </a>
+              <span class="note">{c.note}</span>
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="group" data-reveal>
+    <div class="prompt-box">
+      <p class="label">~$ location</p>
+      <p>Lagos, Nigeria — remote-friendly, timezone-flexible.</p>
+      <p class="label second">~$ status</p>
+      <p>
+        <span class="dot" aria-hidden="true"></span> open to freelance and
+        full-time opportunities, both lanes.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .intro {
+    padding-block: var(--space-6) var(--space-5);
+  }
+
+  .breadcrumb a {
+    color: var(--text-muted);
+  }
+
+  h1 {
+    margin-block: var(--space-3);
+  }
+
+  .lede {
+    color: var(--text-muted);
+    font-size: var(--text-lg);
+  }
+
+  .group {
+    padding-block: var(--space-4);
+  }
+
+  .channels {
+    margin-top: var(--space-3);
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .channels li {
+    display: grid;
+    grid-template-columns: 11rem 1fr;
+    gap: var(--space-3);
+    padding: var(--space-3) 0;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  .key {
+    padding-top: 0.15rem;
+  }
+
+  .value {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .value a {
+    font-size: var(--text-lg);
+    word-break: break-all;
+  }
+
+  .note {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+  }
+
+  .prompt-box {
+    margin-top: var(--space-4);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    padding: var(--space-4);
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .prompt-box .label {
+    color: var(--accent);
+  }
+
+  .second {
+    margin-top: var(--space-3);
+  }
+
+  .dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 6px var(--accent);
+    margin-right: 0.4em;
+  }
+
+  @media (max-width: 540px) {
+    .channels li {
+      grid-template-columns: 1fr;
+      gap: var(--space-1);
+    }
+  }
+</style>

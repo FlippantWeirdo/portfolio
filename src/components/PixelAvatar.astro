@@ -1,0 +1,71 @@
+---
+/**
+ * Terminal-green pixel avatar — monochrome on purpose (CRT phosphor, not a headshot).
+ * 16×16 grid, drawn with rects so it stays crisp at any size.
+ */
+interface Props {
+  size?: number;
+}
+const { size = 112 } = Astro.props;
+
+// palette
+const FACE = '#5DF2A3'; // phosphor mint
+const DARK = '#2B7D52'; // shaded mint (hair, shirt)
+const BG = '#14171A'; // surface (eyes, mouth)
+
+// [x, y, w, h, color]
+const px: [number, number, number, number, string][] = [
+  // hair
+  [6, 1, 4, 1, DARK],
+  [5, 2, 6, 1, DARK],
+  [5, 3, 1, 2, DARK],
+  [10, 3, 1, 2, DARK],
+  // face
+  [6, 3, 4, 1, FACE],
+  [6, 4, 4, 1, FACE],
+  [5, 5, 6, 1, FACE],
+  [5, 6, 6, 1, FACE],
+  [5, 7, 6, 1, FACE],
+  [6, 8, 4, 1, FACE],
+  // eyes
+  [6, 5, 1, 1, BG],
+  [9, 5, 1, 1, BG],
+  // mouth (slight smile)
+  [7, 7, 2, 1, BG],
+  // neck
+  [7, 9, 2, 1, DARK],
+  // shoulders / shirt
+  [4, 10, 8, 1, DARK],
+  [3, 11, 10, 1, DARK],
+  [3, 12, 10, 1, DARK],
+  [3, 13, 10, 1, DARK],
+  // collar notch
+  [7, 10, 2, 1, FACE],
+];
+---
+
+<svg
+  class="avatar"
+  width={size}
+  height={size}
+  viewBox="0 0 16 16"
+  role="img"
+  aria-label="Pixel avatar of Adefila Abdulmuiz"
+  shape-rendering="crispEdges"
+>
+  <rect x="0" y="0" width="16" height="16" fill={BG}></rect>
+  {px.map(([x, y, w, h, fill]) => <rect x={x} y={y} width={w} height={h} fill={fill} />)}
+  <!-- scanlines over the portrait -->
+  {
+    Array.from({ length: 8 }, (_, i) => (
+      <rect x="0" y={i * 2 + 1} width="16" height="0.18" fill="#0B0D0E" opacity="0.45" />
+    ))
+  }
+</svg>
+
+<style>
+  .avatar {
+    border: 1px solid var(--border);
+    display: block;
+  }
+</style>

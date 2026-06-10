@@ -1,0 +1,141 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+
+const projects = (await getCollection('projects', (p) => p.data.domain === 'software')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+const roles = projects.filter((p) => p.data.kind === 'role');
+const freelance = projects.filter((p) => p.data.kind === 'freelance');
+
+const skills = [
+  {
+    group: 'languages & frameworks',
+    items: ['Flutter', 'React Native', 'React.js', 'Next.js', 'TypeScript', 'JavaScript (ES6+)', 'HTML5', 'CSS3'],
+  },
+  { group: 'backend & data', items: ['Supabase', 'Firebase', 'REST'] },
+  { group: 'state', items: ['Provider', 'Zustand'] },
+  { group: 'workflow', items: ['Git', 'Figma → production UI'] },
+];
+---
+
+<Base
+  title="Software — Adefila Abdulmuiz"
+  description="Mobile & web development portfolio of Adefila Abdulmuiz — Flutter, React Native, Next.js, TypeScript. Apps in production."
+>
+  <section class="intro">
+    <p class="label breadcrumb"><a href="/">~</a>/software</p>
+    <h1>Apps people actually open.</h1>
+    <p class="lede">
+      Mobile-first developer working across Flutter and React Native, with web in
+      Next.js and TypeScript. Two years of remote production work — auth flows,
+      offline support, in-app subscriptions, and a lot of Figma frames turned into
+      screens that survive contact with real users.
+    </p>
+  </section>
+
+  <section class="group">
+    <h2 class="label" data-reveal>// roles</h2>
+    <div class="grid">
+      {roles.map((p, i) => <ProjectCard project={p} index={i} />)}
+    </div>
+  </section>
+
+  <section class="group">
+    <h2 class="label" data-reveal>// freelance &amp; client work</h2>
+    <div class="grid">
+      {freelance.map((p, i) => <ProjectCard project={p} index={i} />)}
+    </div>
+  </section>
+
+  <section class="group">
+    <h2 class="label" data-reveal>// stack</h2>
+    <dl class="skills">
+      {
+        skills.map((s, i) => (
+          <div class="skill-row" data-reveal style={`--reveal-delay: ${i * 70}ms`}>
+            <dt class="label">{s.group}</dt>
+            <dd>{s.items.join(' · ')}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+
+  <aside class="other-lane" data-reveal>
+    <p class="label">// the other lane</p>
+    <p>
+      I also design things that get built out of steel and copper —
+      <a href="/engineering">cd ../engineering →</a>
+    </p>
+  </aside>
+</Base>
+
+<style>
+  .intro {
+    padding-block: var(--space-6) var(--space-5);
+  }
+
+  .breadcrumb a {
+    color: var(--text-muted);
+  }
+
+  h1 {
+    margin-block: var(--space-3);
+  }
+
+  .lede {
+    color: var(--text-muted);
+    font-size: var(--text-lg);
+  }
+
+  .group {
+    padding-block: var(--space-4);
+  }
+
+  .grid {
+    margin-top: var(--space-3);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+    gap: var(--space-4);
+    align-items: stretch;
+  }
+
+  .skills {
+    margin-top: var(--space-3);
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .skill-row {
+    display: grid;
+    grid-template-columns: 14rem 1fr;
+    gap: var(--space-3);
+    padding: var(--space-2) 0;
+    border-bottom: 1px dashed var(--border);
+    font-size: var(--text-sm);
+  }
+
+  .skill-row dd {
+    margin: 0;
+  }
+
+  .other-lane {
+    margin-top: var(--space-6);
+    border: 1px dashed var(--border);
+    padding: var(--space-4);
+  }
+
+  .other-lane p:last-child {
+    margin-top: var(--space-2);
+  }
+
+  @media (max-width: 540px) {
+    .skill-row {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+  }
+</style>

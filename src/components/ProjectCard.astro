@@ -1,0 +1,179 @@
+---
+import { render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  index?: number;
+}
+
+const { project, index = 0 } = Astro.props;
+const { data } = project;
+const hasBody = Boolean(project.body?.trim());
+const { Content } = await render(project);
+---
+
+<article class="card" data-reveal style={`--reveal-delay: ${(index % 4) * 80}ms`}>
+  <header>
+    <div class="title-row">
+      <h3>{data.title}</h3>
+      {data.status && <span class="status">{data.status}</span>}
+    </div>
+    <p class="meta">
+      <span>{data.role}</span>
+      <span class="time">{data.timeframe}</span>
+    </p>
+  </header>
+
+  <p class="summary">{data.summary}</p>
+
+  {
+    hasBody && (
+      <div class="body">
+        <Content />
+      </div>
+    )
+  }
+
+  {
+    data.highlights.length > 0 && (
+      <ul class="highlights">
+        {data.highlights.map((h) => (
+          <li>{h}</li>
+        ))}
+      </ul>
+    )
+  }
+
+  <footer>
+    {
+      data.stack.length > 0 && (
+        <ul class="tags" aria-label="Stack">
+          {data.stack.map((t) => (
+            <li>{t}</li>
+          ))}
+        </ul>
+      )
+    }
+    {
+      data.links.length > 0 && (
+        <p class="links">
+          {data.links.map((l) => (
+            <a href={l.url} target="_blank" rel="noopener noreferrer">
+              {l.label} ↗
+            </a>
+          ))}
+        </p>
+      )
+    }
+  </footer>
+</article>
+
+<style>
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    transition: border-color var(--speed-fast) var(--ease);
+  }
+
+  .card:hover {
+    border-color: color-mix(in srgb, var(--border) 40%, var(--accent));
+  }
+
+  .title-row {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  h3 {
+    font-size: var(--text-xl);
+  }
+
+  .status {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+    background: var(--accent-dim);
+    padding: 0.1rem 0.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .meta {
+    margin-top: var(--space-1);
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+
+  .time {
+    white-space: nowrap;
+  }
+
+  .summary {
+    font-size: var(--text-sm);
+  }
+
+  .body {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    border-left: 2px solid var(--border);
+    padding-left: var(--space-3);
+  }
+
+  .body :global(p + p) {
+    margin-top: var(--space-2);
+  }
+
+  .highlights {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: var(--space-1);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+
+  .highlights li::before {
+    content: '> ';
+    color: var(--accent);
+  }
+
+  footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .tags {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .tags li {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    padding: 0.15rem 0.5rem;
+  }
+
+  .links {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    font-size: var(--text-sm);
+  }
+</style>

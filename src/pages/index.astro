@@ -1,17 +1,359 @@
 ---
+import Base from '../layouts/Base.astro';
 
+const lanes = [
+  {
+    href: '/software',
+    name: 'software',
+    heading: 'Apps in production',
+    blurb:
+      'Mobile & web development — Flutter, React Native, Next.js, TypeScript. Currently shipping at Decentralyne, with freelance apps in the Play Store pipeline.',
+    tags: ['flutter', 'react native', 'next.js', 'typescript', 'supabase'],
+    cta: 'cd software/',
+  },
+  {
+    href: '/engineering',
+    name: 'engineering',
+    heading: 'CAD & electrical',
+    blurb:
+      'Piping and plant design, lighting simulation, power SLDs and data-center operations. AutoCAD, Plant 3D, DIALux, Navisworks — trained at NNPC, currently embedded in a data center.',
+    tags: ['autocad', 'plant 3d', 'dialux', 'navisworks', 'sld'],
+    cta: 'cd engineering/',
+  },
+];
+
+const currently = [
+  { k: 'mobile dev', v: 'Decentralyne · Oct 2024 →' },
+  { k: 'siwes', v: 'Data center · electrical infrastructure' },
+  { k: 'degree', v: 'B.Eng Mechatronics, 400L · Bells Tech' },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base title="Adefila Abdulmuiz — Mechatronics × Software">
+  <!-- ======================= HERO ======================= -->
+  <section class="hero">
+    <p class="label prompt-line" aria-hidden="true">~$ whoami</p>
+    <!-- ghost span reserves the final layout so typing causes zero layout shift -->
+    <h1 id="tagline">
+      <span class="ghost">A human being who ships software.</span>
+      <span class="typed" aria-hidden="true"></span>
+    </h1>
+    <p class="hero-sub">
+      I spend my days interpreting P&amp;IDs and my nights pushing Flutter builds —
+      occasionally the other way round. Most people pick the hardware lane or the
+      software lane. I took the interchange, and it turns out the view is better
+      from there.
+    </p>
+    <div class="hero-meta">
+      <span class="label">lagos, nigeria</span>
+      <span class="label sep" aria-hidden="true">·</span>
+      <span class="label">mobile &amp; web dev</span>
+      <span class="label sep" aria-hidden="true">·</span>
+      <span class="label">cad &amp; electrical</span>
+    </div>
+  </section>
+
+  <!-- ======================= FORK ======================= -->
+  <section class="fork" aria-label="Choose a lane">
+    <p class="label" data-reveal>// pick a lane — both are real</p>
+    <div class="fork-grid">
+      {
+        lanes.map((lane, i) => (
+          <a
+            class="lane-card"
+            href={lane.href}
+            data-reveal
+            style={`--reveal-delay: ${i * 90}ms`}
+          >
+            <p class="label lane-path">./{lane.name}</p>
+            <h2>{lane.heading}</h2>
+            <p class="lane-blurb">{lane.blurb}</p>
+            <ul class="tags" aria-label="Key tools">
+              {lane.tags.map((t) => (
+                <li>{t}</li>
+              ))}
+            </ul>
+            <span class="lane-cta" aria-hidden="true">
+              <span class="accent">$</span> {lane.cta} <span class="arrow">→</span>
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- ======================= NARRATIVE ======================= -->
+  <section class="narrative">
+    <p class="label" data-reveal>// why both</p>
+    <div class="narrative-grid">
+      <div data-reveal>
+        <h3>Two languages, one translator</h3>
+        <p>
+          Engineering teams and software teams famously talk past each other. I'm
+          fluent in both — comfortable turning a piping sketch into a Plant 3D model
+          in the morning and a Figma frame into a production app screen after lunch.
+        </p>
+      </div>
+      <div data-reveal style="--reveal-delay: 90ms">
+        <h3>Built where it's physical</h3>
+        <p>
+          Lighting calcs, switchgear single-line diagrams, data-center SOPs — work
+          where a wrong number isn't a bug, it's a hazard. That discipline follows
+          me into every codebase.
+        </p>
+      </div>
+      <div data-reveal style="--reveal-delay: 180ms">
+        <h3>Shipped where it's digital</h3>
+        <p>
+          Real apps with real users: subscription management, tracking,
+          offline-first features. Not tutorial projects — things people open every
+          day and quietly rely on.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= CURRENTLY ======================= -->
+  <section class="currently">
+    <p class="label" data-reveal>// currently</p>
+    <dl>
+      {
+        currently.map((item, i) => (
+          <div class="row" data-reveal style={`--reveal-delay: ${i * 70}ms`}>
+            <dt class="label">{item.k}</dt>
+            <dd>{item.v}</dd>
+          </div>
+        ))
+      }
+    </dl>
+    <p class="closing" data-reveal>
+      Want the full story? Head to <a href="/about">./about</a> — or skip the
+      reading and <a href="/contact">say hello</a>.
+    </p>
+  </section>
+</Base>
+
+<style>
+  /* ---------- hero ---------- */
+  .hero {
+    padding-block: var(--space-7) var(--space-6);
+  }
+
+  .prompt-line {
+    color: var(--accent);
+    margin-bottom: var(--space-3);
+  }
+
+  h1 {
+    position: relative;
+    max-width: 18ch;
+  }
+
+  .ghost {
+    visibility: visible; /* shown when JS is off or motion is reduced */
+  }
+
+  h1.is-typing .ghost {
+    visibility: hidden; /* still occupies space — layout stays put */
+  }
+
+  .typed {
+    position: absolute;
+    inset: 0;
+  }
+
+  h1:not(.is-typing) .ghost::after,
+  h1.is-typing .typed::after {
+    content: '▊';
+    color: var(--accent);
+    animation: blink 1.1s steps(1) infinite;
+    margin-left: 0.08em;
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .hero-sub {
+    margin-top: var(--space-4);
+    color: var(--text-muted);
+    font-size: var(--text-lg);
+  }
+
+  .hero-meta {
+    margin-top: var(--space-4);
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+
+  .sep {
+    color: var(--accent);
+  }
+
+  /* ---------- fork ---------- */
+  .fork {
+    padding-block: var(--space-5);
+  }
+
+  .fork-grid {
+    margin-top: var(--space-3);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+    gap: var(--space-4);
+  }
+
+  .lane-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: var(--space-4);
+    color: var(--text);
+    transition:
+      border-color var(--speed-fast) var(--ease),
+      background-color var(--speed-fast) var(--ease);
+  }
+
+  .lane-card:hover {
+    text-decoration: none;
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--surface) 92%, var(--accent));
+  }
+
+  .lane-path {
+    color: var(--accent);
+  }
+
+  .lane-blurb {
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    flex: 1;
+  }
+
+  .tags {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .tags li {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    padding: 0.15rem 0.5rem;
+  }
+
+  .lane-cta {
+    font-size: var(--text-sm);
+  }
+
+  .arrow {
+    display: inline-block;
+    transition: transform var(--speed-fast) var(--ease);
+  }
+
+  .lane-card:hover .arrow {
+    transform: translateX(4px);
+  }
+
+  /* ---------- narrative ---------- */
+  .narrative {
+    padding-block: var(--space-6);
+  }
+
+  .narrative-grid {
+    margin-top: var(--space-4);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+    gap: var(--space-5) var(--space-4);
+  }
+
+  .narrative-grid h3 {
+    font-size: var(--text-base);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: var(--space-2);
+  }
+
+  .narrative-grid p {
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+  }
+
+  /* ---------- currently ---------- */
+  .currently {
+    padding-block: var(--space-5);
+    border-top: 1px solid var(--border);
+  }
+
+  dl {
+    margin-top: var(--space-3);
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 10rem 1fr;
+    gap: var(--space-3);
+    padding: var(--space-2) 0;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  dd {
+    margin: 0;
+    font-size: var(--text-sm);
+  }
+
+  .closing {
+    margin-top: var(--space-4);
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 480px) {
+    .row {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+  }
+</style>
+
+<script>
+  // Terminal-typing effect for the hero tagline.
+  // Full text ships in the HTML (SEO + no-JS safe); JS retypes it on load.
+  function initTyping() {
+    const el = document.getElementById('tagline');
+    const ghost = el?.querySelector('.ghost');
+    const typed = el?.querySelector('.typed');
+    if (!el || !ghost || !typed || el.dataset.typedDone) return;
+
+    el.dataset.typedDone = 'true';
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return; // ghost stays visible — no animation
+    }
+
+    const full = ghost.textContent ?? '';
+    el.setAttribute('aria-label', full); // screen readers get the full line immediately
+    el.classList.add('is-typing'); // hides ghost, keeps its space
+
+    let i = 0;
+    const tick = () => {
+      i += 1;
+      typed.textContent = full.slice(0, i);
+      if (i < full.length) {
+        window.setTimeout(tick, 26 + Math.random() * 44);
+      }
+    };
+    window.setTimeout(tick, 300);
+  }
+
+  document.addEventListener('astro:page-load', initTyping);
+</script>

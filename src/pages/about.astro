@@ -1,0 +1,208 @@
+---
+import Base from '../layouts/Base.astro';
+import PixelAvatar from '../components/PixelAvatar.astro';
+
+const log = [
+  { date: '2024-10', entry: 'Joined Decentralyne as a mobile developer — still there, still shipping.' },
+  { date: '2025-07', entry: 'Industrial attachment at NNPC Engineering & Technical Company: piping, Plant 3D, clash reviews.' },
+  { date: '2025-11', entry: 'Picked up a frontend role at Downtown — site + dashboard.' },
+  { date: '2026-03', entry: 'Wrapped up Downtown. Shipped, handed over, moved on.' },
+  { date: '2026', entry: 'SIWES placement at a Lagos data center — live electrical infrastructure, SOPs, SLDs. (current)' },
+];
+---
+
+<Base
+  title="About — Adefila Abdulmuiz"
+  description="About Adefila Abdulmuiz — mechatronics engineering student at Bells University of Technology, mobile developer, and CAD practitioner in Lagos, Nigeria."
+>
+  <section class="intro">
+    <div class="intro-text">
+      <p class="label breadcrumb"><a href="/">~</a>/about</p>
+      <h1>Engineer by degree.<br />Developer by compulsion.</h1>
+      <p class="lede">
+        Mechatronics is the degree you pick when you can't choose between machines
+        and computers. I picked it precisely so I wouldn't have to choose — and then
+        didn't choose anyway.
+      </p>
+    </div>
+    <figure class="portrait">
+      <PixelAvatar size={128} />
+      <figcaption class="label">adefila.png · 16×16</figcaption>
+    </figure>
+  </section>
+
+  <section class="group">
+    <h2 class="label" data-reveal>// the short version</h2>
+    <div class="prose" data-reveal>
+      <p>
+        I'm a final-year Mechatronics Engineering student at Bells University of
+        Technology, and for the last two years I've been running two careers in
+        parallel: by day (officially), CAD and electrical engineering — piping
+        models, lighting simulations, single-line diagrams, data-center
+        documentation. By night (also officially), mobile and web development —
+        Flutter and React Native apps in production, with real users and real
+        crash reports.
+      </p>
+      <p>
+        The useful side effect: I've become a translator. Engineering teams and
+        software teams notoriously talk past each other, and I've sat on both
+        sides of that conversation — close enough to the hardware to respect it,
+        close enough to the codebase to ship it. Requirements written in
+        engineer-speak come out the other end as working software, and vice
+        versa.
+      </p>
+    </div>
+  </section>
+
+  <section class="group">
+    <h2 class="label" data-reveal>// the log</h2>
+    <ol class="log">
+      {
+        log.map((item, i) => (
+          <li data-reveal style={`--reveal-delay: ${i * 70}ms`}>
+            <span class="date">[{item.date}]</span>
+            <span class="entry">{item.entry}</span>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="group">
+    <h2 class="label" data-reveal>// education</h2>
+    <div class="edu" data-reveal>
+      <p>
+        <strong>B.Eng Mechatronics Engineering</strong> — Bells University of
+        Technology, Ogun, Nigeria.
+      </p>
+      <p class="muted">Currently in 400 level.</p>
+    </div>
+  </section>
+
+  <section class="group">
+    <h2 class="label" data-reveal>// full disclosure</h2>
+    <div class="prose" data-reveal>
+      <p>
+        I once launched a public learning series on LinkedIn called
+        <em>"100 Days of Growth."</em> It lasted four days. In my defence, the
+        growth was real — I just spent it building things instead of posting
+        about building things. The series may return; the consistency arc is
+        still in development.
+      </p>
+    </div>
+  </section>
+
+  <aside class="next" data-reveal>
+    <p class="label">// where to next</p>
+    <p>
+      See the work: <a href="/software">./software</a> ·
+      <a href="/engineering">./engineering</a> — or
+      <a href="/contact">say hello</a>.
+    </p>
+  </aside>
+</Base>
+
+<style>
+  .intro {
+    padding-block: var(--space-6) var(--space-5);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-5);
+    flex-wrap: wrap;
+  }
+
+  .intro-text {
+    flex: 1 1 28rem;
+  }
+
+  .portrait {
+    margin: 0;
+    display: grid;
+    gap: var(--space-2);
+    justify-items: center;
+  }
+
+  .breadcrumb a {
+    color: var(--text-muted);
+  }
+
+  h1 {
+    margin-block: var(--space-3);
+  }
+
+  .lede {
+    color: var(--text-muted);
+    font-size: var(--text-lg);
+  }
+
+  .group {
+    padding-block: var(--space-4);
+  }
+
+  .prose {
+    margin-top: var(--space-3);
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .prose p {
+    color: var(--text-muted);
+  }
+
+  .prose em,
+  .prose strong {
+    color: var(--text);
+  }
+
+  .log {
+    margin-top: var(--space-3);
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .log li {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: var(--space-3);
+    padding: var(--space-2) 0;
+    border-bottom: 1px dashed var(--border);
+    font-size: var(--text-sm);
+  }
+
+  .date {
+    color: var(--accent);
+  }
+
+  .entry {
+    color: var(--text-muted);
+  }
+
+  .edu {
+    margin-top: var(--space-3);
+  }
+
+  .muted {
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+  }
+
+  .next {
+    margin-top: var(--space-6);
+    border: 1px dashed var(--border);
+    padding: var(--space-4);
+  }
+
+  .next p:last-child {
+    margin-top: var(--space-2);
+  }
+
+  @media (max-width: 480px) {
+    .log li {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+  }
+</style>

@@ -1,172 +1,59 @@
 ---
 import Base from '../layouts/Base.astro';
 
-const channels = [
-  {
-    k: 'email',
-    label: 'abdulmuiza@outlook.com',
-    href: 'mailto:abdulmuiza@outlook.com',
-    note: 'fastest route — I reply quicker than Google Play approves apps',
-  },
-  {
-    k: 'phone / whatsapp',
-    label: '+234 806 285 4313',
-    href: 'tel:+2348062854313',
-    note: 'lagos time (WAT)',
-  },
-  {
-    k: 'linkedin',
-    label: 'abdulmuiz-adefila',
-    href: 'https://www.linkedin.com/in/abdulmuiz-adefila-000b89265/',
-    note: 'professional-ish',
-  },
-  {
-    k: 'github',
-    label: 'FlippantWeirdo',
-    href: 'https://github.com/FlippantWeirdo',
-    note: 'the username predates the professionalism',
-  },
-];
+const sentUrl = new URL('/contact/sent/', Astro.site).href;
 ---
-
-<Base
-  title="Contact — Adefila Abdulmuiz"
-  description="Get in touch with Adefila Abdulmuiz — email, LinkedIn, GitHub. Based in Lagos, Nigeria."
->
+<Base title="Contact — Adefila Abdulmuiz" description="Get in touch with Adefila Abdulmuiz about mobile development and frontend roles or projects.">
   <section class="intro">
-    <p class="label breadcrumb"><a href="/">~</a>/contact</p>
-    <h1>Say hello.</h1>
-    <p class="lede">
-      Got a product to ship, a diagram to draw, or something in between? My inbox
-      is open — whether you arrived here for the software or the switchgear.
-    </p>
+    <div>
+      <h1>Let's make<br /><em>something good.</em></h1>
+      <p>I'm open to mobile and frontend roles. If you're hiring, or have a product you want to build, I'd love to hear about it.</p>
+      <a class="button button-lime" href="#message">Send a note ↓</a>
+    </div>
+    <div class="art" aria-hidden="true"><span>✳</span></div>
   </section>
 
-  <section class="group">
-    <h2 class="label" data-reveal>// channels</h2>
-    <ul class="channels">
-      {
-        channels.map((c, i) => (
-          <li data-reveal style={`--reveal-delay: ${i * 70}ms`}>
-            <span class="label key">{c.k}</span>
-            <span class="value">
-              <a
-                href={c.href}
-                target={c.href.startsWith('http') ? '_blank' : undefined}
-                rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              >
-                {c.label}
-              </a>
-              <span class="note">{c.note}</span>
-            </span>
-          </li>
-        ))
-      }
-    </ul>
+  <section class="message-section" id="message" aria-labelledby="message-title">
+    <div class="message-copy">
+      <h2 id="message-title">Say hello.</h2>
+      <p>Tell me about the role, the project, or just what you're thinking. A few lines are enough.</p>
+      <a href="mailto:abdulmuiza@outlook.com">Prefer email? Write to me directly ↗</a>
+    </div>
+    <form class="contact-form" action="https://formsubmit.co/abdulmuiza@outlook.com" method="POST">
+      <input type="hidden" name="_subject" value="New message from adefila.cv" />
+      <input type="hidden" name="_next" value={sentUrl} />
+      <input class="honey" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <div class="field-row">
+        <div class="field">
+          <label for="contact-name">Your name</label>
+          <input id="contact-name" name="name" type="text" autocomplete="name" placeholder="How should I address you?" required maxlength="120" />
+        </div>
+        <div class="field">
+          <label for="contact-email">Your email</label>
+          <input id="contact-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required maxlength="254" />
+        </div>
+      </div>
+      <div class="field">
+        <label for="contact-message">Your message</label>
+        <textarea id="contact-message" name="message" rows="6" placeholder="I'd love to hear what you're working on…" required maxlength="5000"></textarea>
+      </div>
+      <button class="button button-blue" type="submit">Send message ↗</button>
+    </form>
   </section>
 
-  <section class="group" data-reveal>
-    <div class="prompt-box">
-      <p class="label">~$ location</p>
-      <p>Lagos, Nigeria — remote-friendly, timezone-flexible.</p>
-      <p class="label second">~$ status</p>
-      <p>
-        <span class="dot" aria-hidden="true"></span> open to freelance and
-        full-time opportunities, both lanes.
-      </p>
+  <section class="channels" aria-labelledby="find-title">
+    <h2 id="find-title">Find me here.</h2>
+    <div class="channel-list">
+      <a href="mailto:abdulmuiza@outlook.com"><span>Email</span><strong>abdulmuiza@outlook.com</strong><span aria-hidden="true">↗</span></a>
+      <a href="https://www.linkedin.com/in/abdulmuiz-adefila-000b89265/" target="_blank" rel="noopener noreferrer"><span>LinkedIn</span><strong>Let's connect</strong><span aria-hidden="true">↗</span></a>
+      <a href="https://github.com/FlippantWeirdo" target="_blank" rel="noopener noreferrer"><span>GitHub</span><strong>See the code</strong><span aria-hidden="true">↗</span></a>
     </div>
   </section>
 </Base>
-
 <style>
-  .intro {
-    padding-block: var(--space-6) var(--space-5);
-  }
-
-  .breadcrumb a {
-    color: var(--text-muted);
-  }
-
-  h1 {
-    margin-block: var(--space-3);
-  }
-
-  .lede {
-    color: var(--text-muted);
-    font-size: var(--text-lg);
-  }
-
-  .group {
-    padding-block: var(--space-4);
-  }
-
-  .channels {
-    margin-top: var(--space-3);
-    list-style: none;
-    padding: 0;
-    display: grid;
-    gap: var(--space-2);
-  }
-
-  .channels li {
-    display: grid;
-    grid-template-columns: 11rem 1fr;
-    gap: var(--space-3);
-    padding: var(--space-3) 0;
-    border-bottom: 1px dashed var(--border);
-  }
-
-  .key {
-    padding-top: 0.15rem;
-  }
-
-  .value {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-1);
-  }
-
-  .value a {
-    font-size: var(--text-lg);
-    word-break: break-all;
-  }
-
-  .note {
-    font-size: var(--text-xs);
-    color: var(--text-muted);
-  }
-
-  .prompt-box {
-    margin-top: var(--space-4);
-    border: 1px solid var(--border);
-    background: var(--surface);
-    padding: var(--space-4);
-    display: grid;
-    gap: var(--space-2);
-  }
-
-  .prompt-box .label {
-    color: var(--accent);
-  }
-
-  .second {
-    margin-top: var(--space-3);
-  }
-
-  .dot {
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 6px var(--accent);
-    margin-right: 0.4em;
-  }
-
-  @media (max-width: 540px) {
-    .channels li {
-      grid-template-columns: 1fr;
-      gap: var(--space-1);
-    }
-  }
+  .intro{background:var(--blue);color:white;border-radius:22px;min-height:630px;display:grid;grid-template-columns:1fr .8fr;overflow:hidden;position:relative}.intro>div:first-child{padding:85px 7%;position:relative;z-index:2}.intro h1{font-size:clamp(66px,6.3vw,95px);line-height:.95;letter-spacing:-.04em;margin:0 0 35px}.intro h1 em{color:var(--lime);font-style:normal}.intro p{font-size:17px;line-height:1.7;color:#edeaff;max-width:490px;margin-bottom:34px}.art{position:relative}.art::before{content:"";position:absolute;width:600px;height:600px;left:-20%;top:10%;border-radius:50%;border:1px solid rgba(255,255,255,.3);box-shadow:0 0 0 90px rgba(255,255,255,.05),0 0 0 180px rgba(255,255,255,.04)}.art span{position:absolute;font-size:380px;color:var(--orange);top:10%;left:2%;animation:spin 28s linear infinite}
+  .message-section{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(35px,6vw,100px);padding:110px 4% 100px;scroll-margin-top:35px}.message-copy h2,.channels h2{font-size:clamp(50px,5vw,76px);letter-spacing:-.04em;line-height:1;margin:0 0 25px}.message-copy p{font-size:17px;line-height:1.7;color:var(--muted);max-width:360px;margin-bottom:30px}.message-copy a{font-weight:800;color:var(--blue);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:5px}.message-copy a:hover{color:var(--ink)}.contact-form{background:var(--white);border-radius:22px;padding:clamp(25px,4vw,54px);display:grid;gap:23px}.field-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}.field{display:grid;gap:10px}.field label{font-size:13px;font-weight:800}.field input,.field textarea{width:100%;border:1px solid #b9bbd0;border-radius:12px;background:#fff;color:var(--ink);padding:16px 17px;font-size:15px;line-height:1.5;outline:0;transition:border-color .2s ease,box-shadow .2s ease}.field textarea{resize:vertical;min-height:175px}.field input::placeholder,.field textarea::placeholder{color:#62657c;opacity:1}.field input:focus-visible,.field textarea:focus-visible{border-color:var(--blue);box-shadow:0 0 0 3px #d9ff5c}.contact-form .button{border:0;cursor:pointer;justify-self:start}.honey{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
+  .channels{padding:20px 0 100px}.channels h2{margin-bottom:40px}.channel-list{background:var(--white);border-radius:22px;padding:15px 35px}.channel-list a{display:grid;grid-template-columns:1fr 2fr 30px;align-items:center;gap:25px;border-bottom:1px solid #dfe0ec;padding:28px 0;transition:color .2s}.channel-list a:last-child{border-bottom:0}.channel-list a:hover{color:var(--blue)}.channel-list span:first-child{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}.channel-list strong{font-family:var(--font-display);font-size:clamp(21px,2.5vw,34px);letter-spacing:-.03em}.channel-list span:last-child{font-size:27px}
+  @media(max-width:800px){.intro{grid-template-columns:1fr;min-height:720px}.intro>div:first-child{padding:55px 35px}.intro h1{font-size:75px}.art{min-height:200px}.art span{font-size:230px;top:-40%;left:45%}.message-section{grid-template-columns:1fr;padding:80px 3% 70px;gap:35px}.message-copy p{max-width:600px}.channels{padding:20px 0 70px}}
+  @media(max-width:520px){.intro{min-height:690px}.intro>div:first-child{padding:48px 25px}.intro h1{font-size:60px}.intro p{font-size:15px}.message-section{padding:70px 0 60px}.message-copy h2,.channels h2{font-size:51px}.message-copy p{font-size:15px}.contact-form{padding:26px 21px;gap:20px}.field-row{grid-template-columns:1fr;gap:20px}.field input,.field textarea{font-size:16px}.channel-list{padding:5px 22px}.channel-list a{grid-template-columns:1fr 24px;gap:8px;padding:25px 0}.channel-list a span:first-child{grid-column:1 / -1}.channel-list a strong{font-size:22px}}
 </style>

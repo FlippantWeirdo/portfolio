@@ -2,10 +2,10 @@
 title: Nokslock
 domain: software
 kind: freelance
-role: Flutter Developer
+role: Android Mobile Developer
 timeframe: "2025"
-summary: Subscription-management app in Flutter with RevenueCat in-app subscriptions, secure auth, and REST data flows.
-status: Google Play closed testing
+summary: Built the Android app in Flutter end to end, including REST API integration, authentication, data flows, and RevenueCat in-app subscriptions.
+status: Live on Google Play and the App Store
 stack: [Flutter, Provider, RevenueCat, REST, Figma]
 highlights:
   - Secure authentication and data management
@@ -13,10 +13,11 @@ highlights:
   - Figma → production UI
 links:
   - { label: google play, url: "https://play.google.com/store/apps/details?id=com.nokslock.app" }
+  - { label: app store, url: "https://apps.apple.com/ng/app/nokslock/id6784939511" }
 featured: true
 order: 3
 ---
 
-A full client app, end to end. Currently sitting in Google Play closed testing,
-waiting out the 14-day window before production access — the App Store equivalent
-of watching paint dry, except the paint can reject you.
+I handled Nokslock's Android mobile development end to end, from the app interface
+through its authentication, data, and subscription flows. The app is live on Google Play
+and the App Store.

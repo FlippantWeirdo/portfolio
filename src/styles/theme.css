@@ -1,0 +1,125 @@
+/* The selected theme follows the visitor across pages and visits. */
+html[data-theme] body { transition: background-color .38s ease, color .38s ease; }
+html.theme-changing body { transition: none; }
+::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+::view-transition-old(root) { z-index: 0; }
+::view-transition-new(root) { z-index: 1; }
+
+html[data-theme='dark'] {
+  --ink: #f5f3ff;
+  --blue: #b2aaff;
+  --orange: #ff896e;
+  --lime: #dcff6d;
+  --paper: #101222;
+  --white: #1e223b;
+  --muted: #b9bfd5;
+  --dark-line: #3c415e;
+  --dark-royal: #392ec2;
+  color-scheme: dark;
+  background: var(--paper);
+}
+
+html[data-theme='dark'] body { background: var(--paper); color: var(--ink); }
+html[data-theme='dark'] ::selection { background: var(--lime); color: #171a2e; }
+html[data-theme='dark'] ::-webkit-scrollbar-thumb { background: #505675; border-color: var(--paper); }
+html[data-theme='dark'] .skip-link { color: #171a2e; }
+html[data-theme='dark'] .topbar .nav-cta { background: var(--lime); color: #171a2e; }
+html[data-theme='dark'] .topbar .nav-cta:hover { background: #fffefa; }
+html[data-theme='dark'] .theme-toggle { background: var(--lime); border-color: var(--lime); color: #171a2e; }
+html[data-theme='dark'] .theme-toggle:hover { background: #f0ffb0; border-color: #f0ffb0; }
+html[data-theme='dark'] .theme-moon { opacity: 0; transform: rotate(-75deg) scale(.55); }
+html[data-theme='dark'] .theme-sun { opacity: 1; transform: rotate(0) scale(1); }
+html[data-theme='dark'] .mobile-menu nav { box-shadow: 0 18px 40px #05061075; }
+html[data-theme='dark'] .footer { color: #b9bfd5; }
+html[data-theme='dark'] .ticker { border-color: var(--dark-line); }
+html[data-theme='dark'] .button-blue { background: #5748cd; color: white; }
+html[data-theme='dark'] .button-blue:hover { background: #7163ed; }
+html[data-theme='dark'] .button-lime { color: #171a2e; }
+html[data-theme='dark'] .button-dark { background: #efedff; color: #171a2e; }
+html[data-theme='dark'] .button-dark:hover { background: var(--lime); }
+html[data-theme='dark'] .section-intro p { color: var(--muted); }
+
+/* Home: the blue stage remains the lead, surrounded by deeper surfaces. */
+html[data-theme='dark'] body[data-page='home'] .hero { background: var(--dark-royal); }
+html[data-theme='dark'] body[data-page='home'] .hero-intro { color: #e4e2ff; }
+html[data-theme='dark'] body[data-page='home'] .hero-note { color: #d5d1ff; }
+html[data-theme='dark'] body[data-page='home'] .orbit-label { color: #171a2e; }
+html[data-theme='dark'] body[data-page='home'] .between p { color: var(--muted); }
+html[data-theme='dark'] body[data-page='home'] .contact { color: #171a2e; }
+html[data-theme='dark'] body[data-page='home'] .contact .button-dark { background: #171a2e; color: white; }
+html[data-theme='dark'] body[data-page='home'] .contact .button-dark:hover { background: #3026a8; }
+
+/* Project cards retain their individual colors while sitting in a night palette. */
+html[data-theme='dark'] .project.nokslock { background: #293c67; color: #f5f7ff; }
+html[data-theme='dark'] .project.nokslock::before { background: #415a91; }
+html[data-theme='dark'] .project.flamingo { background: #172519; }
+html[data-theme='dark'] .project.admin { background: #badb73; color: #172314; }
+html[data-theme='dark'] .project.rosie { background: #4c2c40; color: #fff0f4; }
+html[data-theme='dark'] .project.rosie::before { background: #70445d; }
+html[data-theme='dark'] .project.caxten { background: #2b3857; }
+html[data-theme='dark'] .project.qstc { background: #874630; color: #fff2e9; }
+html[data-theme='dark'] .project:hover { box-shadow: 0 24px 36px #0506106b; }
+
+/* Work index and technology stack. */
+html[data-theme='dark'] body[data-page='software'] .intro-art { background: #293258; }
+html[data-theme='dark'] body[data-page='software'] .intro-art::before { border-color: #55649e; box-shadow: 0 0 0 90px #313d6b, 0 0 0 180px #29345e; }
+html[data-theme='dark'] body[data-page='software'] .intro p { color: var(--muted); }
+html[data-theme='dark'] body[data-page='software'] .orbit { color: #171a2e; }
+html[data-theme='dark'] body[data-page='software'] .stack-section { background: #242942; color: #f5f3ff; }
+html[data-theme='dark'] body[data-page='software'] .stack-intro p { color: #c8cbe0; }
+html[data-theme='dark'] body[data-page='software'] .stack-group { border-color: var(--dark-line); }
+html[data-theme='dark'] body[data-page='software'] .close { color: #171a2e; }
+html[data-theme='dark'] body[data-page='software'] .close .button-dark { background: #171a2e; color: white; }
+
+/* About: a warm portrait amid dark editorial panels. */
+html[data-theme='dark'] body[data-page='about'] .hero-lede,
+html[data-theme='dark'] body[data-page='about'] .section-heading p,
+html[data-theme='dark'] body[data-page='about'] .role p { color: var(--muted); }
+html[data-theme='dark'] body[data-page='about'] .hero-copy::after { color: #343b64; }
+html[data-theme='dark'] body[data-page='about'] .body-shape { background: #3b2fbc; }
+html[data-theme='dark'] body[data-page='about'] .portrait-open { background: #1b1c35; color: var(--lime); }
+html[data-theme='dark'] body[data-page='about'] .portrait-sticker { color: #171a2e; }
+html[data-theme='dark'] body[data-page='about'] .tile.mobile { background: #2a3d66; color: #f3f5ff; }
+html[data-theme='dark'] body[data-page='about'] .tile.mobile::after { color: #4b629a; }
+html[data-theme='dark'] body[data-page='about'] .tile.frontend { background: #40582c; color: #f4ffe6; }
+html[data-theme='dark'] body[data-page='about'] .tile.frontend::after { color: #5b793f; }
+html[data-theme='dark'] body[data-page='about'] .tile.detail { background: #372ab0; }
+html[data-theme='dark'] body[data-page='about'] .tile.background { background: #4e2e43; color: #fff0f5; }
+html[data-theme='dark'] body[data-page='about'] .tile.background::after { color: #72475e; }
+html[data-theme='dark'] body[data-page='about'] .experience-intro { background: #282c48; color: #f5f3ff; }
+html[data-theme='dark'] body[data-page='about'] .experience-intro p { color: #c8cbe0; }
+html[data-theme='dark'] body[data-page='about'] .role { border-color: var(--dark-line); }
+html[data-theme='dark'] body[data-page='about'] .contact { color: #171a2e; }
+html[data-theme='dark'] body[data-page='about'] .contact .button { background: #171a2e; color: white; }
+
+/* Case studies share the dark shell while each project keeps its own art direction. */
+html[data-theme='dark'] body[data-page='project'] .hero.nokslock { background: #293c67; color: #f5f7ff; }
+html[data-theme='dark'] body[data-page='project'] .hero.flamingo { background: #172519; }
+html[data-theme='dark'] body[data-page='project'] .hero.admin { background: #badb73; color: #172314; }
+html[data-theme='dark'] body[data-page='project'] .hero.rosie { background: #4c2c40; color: #fff0f4; }
+html[data-theme='dark'] body[data-page='project'] .hero.caxten { background: #2b3857; }
+html[data-theme='dark'] body[data-page='project'] .hero.qstc { background: #874630; color: #fff2e9; }
+html[data-theme='dark'] body[data-page='project'] .hero.nokslock .lede,
+html[data-theme='dark'] body[data-page='project'] .hero.rosie .lede,
+html[data-theme='dark'] body[data-page='project'] .hero.qstc .lede { color: inherit; }
+html[data-theme='dark'] body[data-page='project'] .hero .button-dark { background: #f5f3ff; color: #171a2e; }
+html[data-theme='dark'] body[data-page='project'] .facts,
+html[data-theme='dark'] body[data-page='project'] .story li { border-color: var(--dark-line); }
+html[data-theme='dark'] body[data-page='project'] .story p,
+html[data-theme='dark'] body[data-page='project'] .gallery figcaption { color: var(--muted); }
+html[data-theme='dark'] body[data-page='project'] .next { background: var(--dark-royal); }
+
+/* Contact and utility pages. */
+html[data-theme='dark'] body[data-page='contact'] .intro,
+html[data-theme='dark'] body[data-page='sent'] .sent { background: var(--dark-royal); }
+html[data-theme='dark'] body[data-page='contact'] .intro p,
+html[data-theme='dark'] body[data-page='sent'] .sent p { color: #e4e2ff; }
+html[data-theme='dark'] body[data-page='contact'] .field input,
+html[data-theme='dark'] body[data-page='contact'] .field textarea { background: #121629; color: #f5f3ff; border-color: #4e5575; }
+html[data-theme='dark'] body[data-page='contact'] .field input::placeholder,
+html[data-theme='dark'] body[data-page='contact'] .field textarea::placeholder { color: #b0b7cd; }
+html[data-theme='dark'] body[data-page='contact'] .field input:focus-visible,
+html[data-theme='dark'] body[data-page='contact'] .field textarea:focus-visible { border-color: var(--lime); box-shadow: 0 0 0 3px #6d8140; }
+html[data-theme='dark'] body[data-page='contact'] .form-error { color: #ffa4af; }
+html[data-theme='dark'] body[data-page='contact'] .channel-list a { border-color: var(--dark-line); }
+html[data-theme='dark'] body[data-page='engineering'] .list article { border-color: var(--dark-line); }

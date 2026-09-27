@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import '../styles/theme.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
@@ -7,13 +8,28 @@ interface Props { title: string; description?: string; noindex?: boolean; }
 const { title, description = 'Adefila Abdulmuiz builds mobile apps and frontend experiences with care and personality.', noindex = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImage = new URL('/og-2026-09.png', Astro.site).href;
+const pathname = Astro.url.pathname;
+const page = pathname === '/' ? 'home' : pathname.startsWith('/work/') ? 'project' : pathname.startsWith('/contact/sent') ? 'sent' : pathname.split('/')[1];
 ---
 <!doctype html>
 <html lang="en">
   <head>
+    <meta name="theme-color" content="#eff0f8" />
+    <script is:inline>
+      let theme = 'light';
+      try {
+        const requested = new URLSearchParams(location.search).get('theme');
+        const saved = localStorage.getItem('adefila-theme');
+        const preview = sessionStorage.getItem('portfolio-preview-theme');
+        theme = [saved, requested, preview].find(value => value === 'dark' || value === 'light') || 'light';
+        localStorage.setItem('adefila-theme', theme);
+        sessionStorage.removeItem('portfolio-preview-theme');
+      } catch { /* Storage may be unavailable; light remains the default. */ }
+      document.documentElement.dataset.theme = theme;
+      document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#101222' : '#eff0f8';
+    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#eff0f8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -35,7 +51,7 @@ const ogImage = new URL('/og-2026-09.png', Astro.site).href;
     <meta name="twitter:image" content={ogImage} />
     <title>{title}</title>
   </head>
-  <body>
+  <body data-page={page}>
     <a class="skip-link" href="#main">Skip to content</a>
     <Header />
     <main id="main" class="shell"><slot /></main>

@@ -6,7 +6,16 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
   <nav class="nav" aria-label="Main navigation">
     <a class:active={path === '/software' || path.startsWith('/work/')} href="/software">Work</a>
     <a class:active={path === '/about'} href="/about">About</a>
-    <a class="nav-cta" href="/contact">Let's talk ↗</a>
+    <button class="theme-toggle" type="button" aria-label="Dark mode" aria-pressed="false" title="Switch to dark mode">
+      <svg class="theme-icon theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M20.4 15.6A8.5 8.5 0 0 1 8.4 3.6 8.5 8.5 0 1 0 20.4 15.6Z" />
+      </svg>
+      <svg class="theme-icon theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+      </svg>
+    </button>
+    <a class="nav-cta" href="/contact">Let's talk ↗︎</a>
   </nav>
   <details class="mobile-menu">
     <summary>Menu <span aria-hidden="true">＋</span></summary>
@@ -20,9 +29,63 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 <style>
   .topbar{height:86px;display:flex;align-items:center;justify-content:space-between;gap:32px;position:relative;z-index:20}
   .brand{font-family:var(--font-display);font-weight:800;letter-spacing:-.04em;font-size:29px;line-height:1}.brand span{color:var(--orange)}
-  .nav{display:flex;align-items:center;gap:34px;font-size:13px;font-weight:800}.nav a:not(.nav-cta){transition:color .2s}.nav a:not(.nav-cta):hover,.nav a.active{color:var(--blue)}
+  .nav{display:flex;align-items:center;gap:28px;font-size:13px;font-weight:800}.nav a:not(.nav-cta){transition:color .2s}.nav a:not(.nav-cta):hover,.nav a.active{color:var(--blue)}
+  .theme-toggle{position:relative;display:grid;place-items:center;flex:none;width:43px;height:43px;padding:0;border:1px solid #c5c7da;border-radius:50%;background:var(--white);color:var(--ink);cursor:pointer;transition:background-color .25s,border-color .25s,transform .35s cubic-bezier(.16,1,.3,1)}.theme-toggle:hover{transform:rotate(-12deg);border-color:var(--blue)}.theme-toggle:active{transform:scale(.93)}.theme-icon{position:absolute;width:20px;height:20px;transition:transform .55s cubic-bezier(.16,1,.3,1),opacity .3s ease}.theme-moon{opacity:1;transform:rotate(0) scale(1)}.theme-sun{opacity:0;transform:rotate(75deg) scale(.55)}
   .nav-cta{background:var(--ink);color:white;padding:14px 21px;border-radius:100px;transition:background .25s,transform .35s cubic-bezier(.16,1,.3,1)}.nav-cta:hover{background:var(--blue);transform:translateY(-3px)}
   .mobile-menu{display:none}.mobile-menu summary{list-style:none;cursor:pointer;font-size:13px;font-weight:800;background:var(--white);border-radius:100px;padding:11px 16px}.mobile-menu summary::-webkit-details-marker{display:none}.mobile-menu summary span{font-size:17px;margin-left:6px}.mobile-menu[open] summary span{display:inline-block;transform:rotate(45deg)}.mobile-menu nav{position:absolute;top:66px;right:16px;min-width:185px;display:grid;gap:0;padding:8px;background:var(--white);border-radius:16px;box-shadow:0 16px 32px rgba(25,27,53,.14)}.mobile-menu nav a{padding:12px 14px;border-radius:10px;font-size:14px;font-weight:800}.mobile-menu nav a:hover{background:var(--paper);color:var(--blue)}
-  @media(max-width:800px){.topbar{height:70px}.brand{font-size:25px}.nav{margin-left:auto}.nav a:not(.nav-cta){display:none}.mobile-menu{display:block}.nav-cta{padding:12px 17px}}
-  @media(max-width:420px){.topbar{gap:10px}.nav-cta{font-size:11px;padding:11px 13px}.mobile-menu summary{font-size:11px;padding:10px 11px}}
+  @media(max-width:800px){.topbar{height:70px}.brand{font-size:25px}.nav{margin-left:auto;gap:12px}.nav a:not(.nav-cta){display:none}.mobile-menu{display:block}.nav-cta{padding:12px 17px}}
+  @media(max-width:420px){.topbar{gap:9px}.nav{gap:9px}.theme-toggle{width:38px;height:38px}.nav-cta{font-size:11px;padding:11px 12px}.mobile-menu summary{font-size:11px;padding:10px 11px}}
+  @media(max-width:360px){.nav-cta{display:none}}
 </style>
+<script is:inline>
+  const themeToggle = document.querySelector('.theme-toggle');
+  if (themeToggle) {
+    const root = document.documentElement;
+    const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let switching = false;
+
+    const syncToggle = () => {
+      const dark = root.dataset.theme === 'dark';
+      themeToggle.setAttribute('aria-pressed', String(dark));
+      themeToggle.title = dark ? 'Switch to light mode' : 'Switch to dark mode';
+    };
+
+    const setTheme = (theme) => {
+      root.dataset.theme = theme;
+      try { localStorage.setItem('adefila-theme', theme); } catch { /* The switch still works without storage. */ }
+      document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#101222' : '#eff0f8';
+      syncToggle();
+    };
+
+    syncToggle();
+    themeToggle.addEventListener('click', () => {
+      if (switching) return;
+      const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      if (!document.startViewTransition || motionPreference.matches) {
+        setTheme(next);
+        return;
+      }
+
+      switching = true;
+      const bounds = themeToggle.getBoundingClientRect();
+      const x = bounds.left + bounds.width / 2;
+      const y = bounds.top + bounds.height / 2;
+      const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+      root.classList.add('theme-changing');
+      const transition = document.startViewTransition(() => setTheme(next));
+      transition.ready.then(() => {
+        root.animate(
+          { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+          { duration: 620, easing: 'cubic-bezier(.16, 1, .3, 1)', pseudoElement: '::view-transition-new(root)' }
+        );
+      }).catch(() => {});
+      transition.finished.then(() => {
+        root.classList.remove('theme-changing');
+        switching = false;
+      }, () => {
+        root.classList.remove('theme-changing');
+        switching = false;
+      });
+    });
+  }
+</script>

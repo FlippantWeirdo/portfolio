@@ -1,8 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" shape-rendering="crispEdges">
-  <rect width="16" height="16" fill="#0B0D0E"/>
-  <!-- terminal prompt: block cursor + underscore -->
-  <rect x="3" y="3" width="5" height="9" fill="#5DF2A3"/>
-  <rect x="10" y="10" width="4" height="2" fill="#5DF2A3"/>
-  <rect x="3" y="6" width="5" height="1" fill="#0B0D0E" opacity="0.35"/>
-  <rect x="3" y="9" width="5" height="1" fill="#0B0D0E" opacity="0.35"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="17" fill="#3128c9"/>
+  <path d="M12 47 27 15h10l15 32H41l-3-7H25l-3 7H12Zm16-15h7l-3.5-9L28 32Z" fill="#fffefa"/>
+  <circle cx="51" cy="13" r="6" fill="#ff7759"/>
 </svg>

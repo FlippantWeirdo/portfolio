@@ -1,0 +1,16 @@
+---
+interface Props { items: string[] }
+const { items } = Astro.props;
+---
+<div class="ticker ticker-seamless" aria-hidden="true">
+  <div class="ticker-track">
+    {[0, 1].map(() => <div class="ticker-group">{items.map((item) => <><span>{item}</span><b>✳</b></>)}</div>)}
+  </div>
+</div>
+<style>
+  .ticker-seamless .ticker-track{display:flex;width:max-content;animation:ticker-loop 27s linear infinite;will-change:transform}
+  .ticker-seamless .ticker-group{display:flex;align-items:center;justify-content:space-around;flex:0 0 auto;min-width:100vw}
+  .ticker-seamless .ticker-group span{white-space:nowrap}
+  .ticker-seamless .ticker-group b{padding-inline:16px}
+  @keyframes ticker-loop{to{transform:translateX(-50%)}}
+</style>

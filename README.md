@@ -1,43 +1,25 @@
-# Astro Starter Kit: Minimal
+# adefila.cv
+
+A software portfolio for Adefila Abdulmuiz, built with Astro.
+
+## Run locally
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npm run dev
+npm run build
+npm run preview
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Edit the site
 
-## 🚀 Project Structure
+- Home, About, Work, and Contact are in `src/pages/`.
+- Project content and status live in `src/data/work.ts`. Each project has a detail page at `/work/[slug]`.
+- Project screenshots live in `public/images/projects/`. They came from Adefila's local app screenshots and live sites.
+- The Flamingo Admin screenshots contain figures accumulated during testing. Captions on the detail page identify them as testing data.
+- The About portrait is an illustration placeholder in `src/pages/about.astro`. Replace it when a real photo is available.
+- The engineering archive remains at `/engineering` for direct links. It is absent from navigation and the sitemap and has a noindex meta tag.
+- The contact form sends through FormSubmit, which works with Pxxl's static hosting. On the first submission after deployment, FormSubmit emails `abdulmuiza@outlook.com` an activation link. Confirm that email before relying on the form for messages. After activation, send one test message and verify it arrives. The email link on the page works independently.
+- Regenerate the social share image after visual changes with `node scripts/generate-og.mjs`.
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+The old terminal-era components and content files are retained in the repository for reference, but the public software pages use the files above.

@@ -19,7 +19,7 @@ npm run preview
 - The Flamingo Admin screenshots contain figures accumulated during testing. Captions on the detail page identify them as testing data.
 - The About portrait is an illustration placeholder in `src/pages/about.astro`. Replace it when a real photo is available.
 - The engineering archive remains at `/engineering` for direct links. It is absent from navigation and the sitemap and has a noindex meta tag.
-- The contact form sends through FormSubmit, which works with Pxxl's static hosting. On the first submission after deployment, FormSubmit emails `abdulmuiza@outlook.com` an activation link. Confirm that email before relying on the form for messages. After activation, send one test message and verify it arrives. The email link on the page works independently.
+- The contact form sends through FormSubmit, which works with Pxxl's static hosting. JavaScript submits to FormSubmit's AJAX endpoint and sends successful visitors to `/contact/sent/`; the plain HTML form remains as a fallback. On first use, FormSubmit emails `abdulmuiza@outlook.com` an activation link. Confirm that email before relying on the form for messages. The email link on the page works independently.
 - Regenerate the social share image after visual changes with `node scripts/generate-og.mjs`.
 
 The old terminal-era components and content files are retained in the repository for reference, but the public software pages use the files above.

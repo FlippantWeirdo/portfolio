@@ -6,7 +6,7 @@ import Footer from '../components/Footer.astro';
 interface Props { title: string; description?: string; noindex?: boolean; }
 const { title, description = 'Adefila Abdulmuiz builds mobile apps and frontend experiences with care and personality.', noindex = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
-const ogImage = new URL('/og.png', Astro.site).href;
+const ogImage = new URL('/og-2026-09.png', Astro.site).href;
 ---
 <!doctype html>
 <html lang="en">
@@ -28,8 +28,11 @@ const ogImage = new URL('/og.png', Astro.site).href;
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content="Adefila Abdulmuiz" />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Adefila Abdulmuiz — mobile and frontend developer" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} />
     <title>{title}</title>
   </head>
   <body>

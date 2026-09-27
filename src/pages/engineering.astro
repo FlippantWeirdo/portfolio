@@ -6,7 +6,7 @@ const projects = (await getCollection('projects', (p) => p.data.domain === 'engi
 <Base title="Engineering archive — Adefila Abdulmuiz" description="Selected engineering and CAD work by Adefila Abdulmuiz." noindex>
   <section class="intro"><h1>Engineering<br /><em>archive.</em></h1><p>A separate record of my engineering and CAD work.</p></section>
   <section class="list" aria-label="Engineering projects">{projects.map((project) => <article><span>{project.data.kind}</span><div><h2>{project.data.title}</h2><p>{project.data.summary}</p><small>{project.data.role}</small></div></article>)}</section>
-  <div class="back"><a href="/">Back to the software portfolio ↗</a></div>
+  <div class="back"><a href="/">Back to the software portfolio ↗︎</a></div>
 </Base>
 <style>
   .intro{background:var(--white);padding:80px 7%;border-radius:22px;margin-bottom:35px}.intro h1{font-size:clamp(60px,7vw,100px);line-height:.95;letter-spacing:-.04em;margin:0 0 30px}.intro h1 em{font-style:normal;color:var(--blue)}.intro p{font-size:18px;color:var(--muted);font-weight:600}.list{background:var(--white);border-radius:22px;padding:15px 38px}.list article{display:grid;grid-template-columns:1fr 3fr;gap:30px;padding:35px 0;border-bottom:1px solid #dfe0ec}.list article:last-child{border-bottom:0}.list span{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--blue)}.list h2{font-size:clamp(25px,3vw,38px);letter-spacing:-.03em;margin:0 0 12px}.list p{font-size:15px;line-height:1.6;color:var(--muted);max-width:660px}.list small{font-weight:800}.back{padding:50px 0 80px;font-size:14px;font-weight:800}.back a{border-bottom:2px solid var(--orange)}

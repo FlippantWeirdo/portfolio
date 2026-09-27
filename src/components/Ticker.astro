@@ -4,7 +4,7 @@ const { items } = Astro.props;
 ---
 <div class="ticker ticker-seamless" aria-hidden="true">
   <div class="ticker-track">
-    {[0, 1].map(() => <div class="ticker-group">{items.map((item) => <><span>{item}</span><b>✳</b></>)}</div>)}
+    {[0, 1].map(() => <div class="ticker-group">{items.map((item) => <><span>{item}</span><b>✳︎</b></>)}</div>)}
   </div>
 </div>
 <style>

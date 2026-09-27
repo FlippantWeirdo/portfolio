@@ -10,14 +10,14 @@ const sentUrl = new URL('/contact/sent/', Astro.site).href;
       <p>I'm open to mobile and frontend roles. If you're hiring, or have a product you want to build, I'd love to hear about it.</p>
       <a class="button button-lime" href="#message">Send a note ↓</a>
     </div>
-    <div class="art" aria-hidden="true"><span>✳</span></div>
+    <div class="art" aria-hidden="true"><span>✳︎</span></div>
   </section>
 
   <section class="message-section" id="message" aria-labelledby="message-title">
     <div class="message-copy">
       <h2 id="message-title">Say hello.</h2>
       <p>Tell me about the role, the project, or just what you're thinking. A few lines are enough.</p>
-      <a href="mailto:abdulmuiza@outlook.com">Prefer email? Write to me directly ↗</a>
+      <a href="mailto:abdulmuiza@outlook.com">Prefer email? Write to me directly ↗︎</a>
     </div>
     <form class="contact-form" action="https://formsubmit.co/abdulmuiza@outlook.com" method="POST">
       <input type="hidden" name="_subject" value="New message from adefila.cv" />
@@ -37,7 +37,7 @@ const sentUrl = new URL('/contact/sent/', Astro.site).href;
         <label for="contact-message">Your message</label>
         <textarea id="contact-message" name="message" rows="6" placeholder="I'd love to hear what you're working on…" required maxlength="5000"></textarea>
       </div>
-      <button class="button button-blue" type="submit">Send message ↗</button>
+      <button class="button button-blue" type="submit">Send message ↗︎</button>
       <p class="form-error" role="alert" hidden>Couldn't send your message. Please try again, or use the email link on this page.</p>
     </form>
   </section>
@@ -45,9 +45,9 @@ const sentUrl = new URL('/contact/sent/', Astro.site).href;
   <section class="channels" aria-labelledby="find-title">
     <h2 id="find-title">Find me here.</h2>
     <div class="channel-list">
-      <a href="mailto:abdulmuiza@outlook.com"><span>Email</span><strong>abdulmuiza@outlook.com</strong><span aria-hidden="true">↗</span></a>
-      <a href="https://www.linkedin.com/in/abdulmuiz-adefila-000b89265/" target="_blank" rel="noopener noreferrer"><span>LinkedIn</span><strong>Let's connect</strong><span aria-hidden="true">↗</span></a>
-      <a href="https://github.com/FlippantWeirdo" target="_blank" rel="noopener noreferrer"><span>GitHub</span><strong>See the code</strong><span aria-hidden="true">↗</span></a>
+      <a href="mailto:abdulmuiza@outlook.com"><span>Email</span><strong>abdulmuiza@outlook.com</strong><span aria-hidden="true">↗︎</span></a>
+      <a href="https://www.linkedin.com/in/abdulmuiz-adefila-000b89265/" target="_blank" rel="noopener noreferrer"><span>LinkedIn</span><strong>Let's connect</strong><span aria-hidden="true">↗︎</span></a>
+      <a href="https://github.com/FlippantWeirdo" target="_blank" rel="noopener noreferrer"><span>GitHub</span><strong>See the code</strong><span aria-hidden="true">↗︎</span></a>
     </div>
   </section>
 </Base>
@@ -81,7 +81,7 @@ const sentUrl = new URL('/contact/sent/', Astro.site).href;
     } catch {
       errorMessage.hidden = false;
       submitButton.disabled = false;
-      submitButton.textContent = 'Send message ↗';
+      submitButton.textContent = 'Send message ↗︎';
       form.removeAttribute('aria-busy');
     }
   });

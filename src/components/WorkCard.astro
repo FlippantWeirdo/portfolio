@@ -4,7 +4,7 @@ interface Props { project: WorkProject; }
 const { project } = Astro.props;
 ---
 <a class:list={['project', project.tone]} href={`/work/${project.slug}`} aria-label={`View ${project.title} project`}>
-  <span class="project-top"><span class="project-tag">{project.category} · {project.status}</span><span class="project-arrow" aria-hidden="true">↗</span></span>
+  <span class="project-top"><span class="project-tag">{project.category} · {project.status}</span><span class="project-arrow" aria-hidden="true">↗︎</span></span>
   <h3>{project.title}</h3>
   <p>{project.cardText}</p>
   <div class="project-art" aria-hidden="true">

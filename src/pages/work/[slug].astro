@@ -18,8 +18,8 @@ const isWide = ['admin', 'caxten', 'qstc'].includes(project.tone);
       <h1 id="project-title">{project.title}</h1>
       <p class="lede">{project.intro}</p>
       {(project.link || project.secondaryLink) && <div class="hero-links">
-        {project.link && <a class="button button-dark" href={project.link.url} target="_blank" rel="noopener noreferrer">{project.link.label} ↗</a>}
-        {project.secondaryLink && <a class="button button-dark" href={project.secondaryLink.url} target="_blank" rel="noopener noreferrer">{project.secondaryLink.label} ↗</a>}
+        {project.link && <a class="button button-dark" href={project.link.url} target="_blank" rel="noopener noreferrer">{project.link.label} ↗︎</a>}
+        {project.secondaryLink && <a class="button button-dark" href={project.secondaryLink.url} target="_blank" rel="noopener noreferrer">{project.secondaryLink.label} ↗︎</a>}
       </div>}
     </div>
     <div class:list={['hero-visual', { wide: isWide }]} aria-hidden="true">
@@ -41,7 +41,7 @@ const isWide = ['admin', 'caxten', 'qstc'].includes(project.tone);
       {project.images.map((image) => <figure class:list={{wide:image.wide}}><img src={image.src} alt={image.alt} loading="lazy" decoding="async" /><figcaption>{image.alt}{image.note && <span>{image.note}</span>}</figcaption></figure>)}
     </div>
   </section>
-  <section class="next"><div><span>Next project</span><h2>{next.title}</h2></div><a class="button button-lime" href={`/work/${next.slug}`}>Explore project ↗</a></section>
+  <section class="next"><div><span>Next project</span><h2>{next.title}</h2></div><a class="button button-lime" href={`/work/${next.slug}`}>Explore project ↗︎</a></section>
 </Base>
 <style>
   .hero-links{display:flex;flex-wrap:wrap;gap:12px}
